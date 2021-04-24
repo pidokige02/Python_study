@@ -1,0 +1,9 @@
+h1 { color: blue; }
+
+tr.dt > :first-child {
+    color: red;
+}
+tr.dt > :last-child {
+    color: blue;
+}
+

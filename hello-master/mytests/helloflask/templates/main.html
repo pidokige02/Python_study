@@ -1,0 +1,128 @@
+{% extends "l2.html" %}
+{% import "macro/tests.html" as cm with context %}
+{% from "macro/tests.html" import test_macro,cal %}
+{% from "macro/tests.html" import test_macro,cal %}
+{% from "macro/forms.html" import input, radio, radios, textarea, checkbox, select, modal %}
+{% block title %} {{title}} {% endblock %}
+
+{% block section %}
+<div>
+    {{ super() }}
+    aaaaaaaaaaaa
+    {% if main_song %}
+    <div>
+        Main Song: {{main_song.title}} - {{main_song.songartists | length}}
+        <ul>
+            {% for sa in main_song.songartists %}
+            <li>{{sa.artist.name}} - {{sa.atype}}:{{sa.artist.atype}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    <div>
+        <h1>Albums</h1>
+        <ul>
+            {% for s in albums %}
+            <li>
+                {{s.albumid}}.{{s.title}} ({{s.likecnt}}) - <strong>{{s.songs | length}}</strong>
+                {% for song in s.songs %}
+                <p>{{song.title}}</p>
+                {% endfor %}
+            </li>
+            {% else %}
+            <li>There is no albums.</li>
+            {% endfor %}
+        </ul>
+
+        <h1>Songs</h1>
+        <ul>
+            {% for s in songlist %}
+                <li>{{s.albumid}}.{{s.title}} - {{s.album.title}}</li>
+            {% else %}
+                <li>There is no users.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+{% if year %}
+    <div>
+        <h1 class="text-center text-danger">
+            <small><a href="/?year={{year - 1}}" class="text-muted">{{year - 1}}</a></small>
+            {{year}}년
+            <small><a href="/?year={{year + 1}}" class="text-muted">{{year + 1}}</a></small>
+        </h1>
+        <div class="row">
+            {% for m in range(1,13) %}
+            <div class="col">
+                {% set dt = "%s-%s-01" % (year, m) %}
+                {{cal(dt)}}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <p>{{today | ymd('%H:%M') | safe}}</p>
+    <p>{{today | simpledate | safe}}</p>
+    <p>{{ 3096 | filesizeformat(True) }}</p>
+    <p>{{ "  3096.53456" | float | round(2) }}</p>
+    
+    
+    
+    
+    <pre>
+    {{'abc' | center(40)}}
+    {{'abcsdfdsaffdsadasa' | center(40)}}
+    {{ ('abcsdfdsaffdsadasa' * 5) | wordwrap(40)}}
+    {{ ('abcsdfdsaffdsadasa' * 5) | truncate(40)}}
+    </pre>
+    <p>{{ttt}}::{{ cm.test_macro('TTTTTTTT1122333') }}</p>
+    <p>{{ test_macro('QQQQQQQQQQQ') }}</p>
+    
+    {% call(x) cm.test_macro2('Hong', 'bbb') %}
+    <p>This is app.html.call block: <strong>{{x}}</strong></p>
+    {% endcall %}
+    
+{% else %}
+    <h3>calendar need year variable!!</h3>
+{% endif %}
+    <form class="container">
+        <div class="form-group">
+            {{radio('r11', 'rdo', 'val1', 'Value1')}}
+            {{radio('r22', 'rdo', 'val2', 'Value2', "checked")}}
+            {{radio('r33', 'rdo', 'val3', 'Value3')}}
+        </div>
+    
+        {{radios(radioList)}}
+    
+        {{textarea('idta', 'content', 'default value')}}
+    
+        {{checkbox( dict(id='chk1', name='chkname1', checked='checked', text="TEXT") )}}
+    
+        {{select([ dict(id='selid1', text='seltext1', selected=False), dict(id='selid2', text='seltext2', selected=True)])}}
+    </form>
+    
+    <button type="button" onclick="openModal('mdl1')" class="btn btn-primary">Open
+        modal Test</button>
+    
+    {% call modal('mdl1', '테스트 모달', 'fas fa-users', True, "fn_test()") %}
+    <h3>Modal body</h3>
+    <script>
+        function fn_test() {
+            alert('qqqqqqqqqqqqqqqqqqqqq');
+            closeModal('mdl1');
+        }
+    </script>
+    {% endcall %}
+    
+    {{input('password')}}
+{% endblock %}
+
+{% block outer_block %}
+    <p>1111111111</p>
+    {{ super() }}
+    {% block inner_block %} BBBBBB {% endblock inner_block %}
+{% endblock outer_block %}
+
+
+

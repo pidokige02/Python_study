@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Jinja Test Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    {% set title = 'TTT' %}
+    <div>Jinja Test : {{title}} - {{mu}}</div>
+    <hr>
+    <div>
+        Copyright <a href="/tmpl3">IndiFlex Senior Coding</a>
+        Copyright <a href="{{ url_for('tmpl3') }}">IndiFlex Senior Coding</a>
+    </div>
+
+    <ul>
+        {% for rank, title, name, hide, ref in lst2 recursive %}
+        <li>
+            {{loop.index}} - <small>{{title}}</small>: {{name}}
+            {%- if ref -%}
+                {% set outer_loop = loop %}
+                {% for ref_song in ref %}
+                    <p>{{outer_loop.index}} - {{loop.index}} : {{ ref_song[1] }}</p>
+                {% endfor %}
+            {%- endif %}
+        </li>
+        {% endfor %}
+    </ul>
+
+    <hr>
+    <ul>
+        {% for nav in navs recursive %}
+        <li>
+            <a href="{{nav.url | e}}">{{nav.title}} - {{loop.depth}}</a>
+            {%- if nav.children -%}
+            <ul class="{% if (loop.depth == 1) %}font-sm{% endif %}">
+                {{ loop(nav.children) }}
+            </ul>
+            {%- endif %}
+        </li>
+        {% endfor %}
+    </ul>
+
+    <hr>
+
+    <ul>
+        {% for title, name, isShow in lst if not isShow %}
+            <li class="{{loop.cycle('aaa', 'bbb', '')}}">{{title}}: {{name}} - {{loop.last}}</li>
+        {% else %}
+            <li>There is no data.</li>
+        {% endfor %}
+    </ul>
+
+    {{ "}}>> <strong>Strong</strong>" | escape }}
+    <hr>
+    {{ "<strong>Strong1</strong>" | safe}}
+    {{ "<strong>Strong2</strong>" | striptags}}
+
+    <hr>
+
+    
+    
+
+    <pre>
+        {% raw %}
+            {% if True %}
+            TTT
+            {% endif %}
+        {% endraw %}
+
+        ttt 한글
+        {%- if True  -%}
+            TTT
+        {%- endif -%}qqq
+    </pre>
+</body>
+</html>

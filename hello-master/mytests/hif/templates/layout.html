@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" >
+    <title>Layout</title>
+</head>
+<body>
+    <h1>{% block title %}{% endblock %} - Layout Title</h1>
+    <h2>{% block title2 %}2222222{% endblock %} - Layout Title2</h2>
+
+    <div class="container">
+
+        <div class="section">
+            {% block section %}
+            This is Section
+            {% endblock %}
+        </div>
+
+        {% macro test_macro(nm) %}
+            <strong>TEST MACRO: {{nm}}</strong> - {{test_macro.caller}}
+            <strong>{{caller()}}</strong>
+        {% endmacro %}
+
+        {% block main %}
+            This is main area!!
+        {% endblock %}
+
+        {% block outer_block %}
+            <h3>
+                {% block inner_block %}{% endblock  %} - InnerBlock
+            </h3>
+        {% endblock outer_block %}
+
+        <div id="footer">
+            {% block footer %}
+            &copy; Copyright <a href="/tmpl2">IndiFlex Senior Coding</a>
+            {% endblock %}
+        </div>
+    </div>
+</body>
+</html>

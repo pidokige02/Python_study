@@ -1,0 +1,41 @@
+<ul>
+    {% for rank, title, name, hide, ref in lst recursive %}
+        <li class="{{loop.cycle('aaa', 'bbb')}}">
+            <small>{{rank}} / {{loop.length}}</small> {{title}}: {{name}}
+            {%- if ref -%}
+                <ul class="sub">{{ loop(ref) }}</ul>
+            {%- endif %}
+        </li>
+    {% endfor %}
+</ul>
+
+<pre>
+ttt 한글
+{%- if True  %}
+    TTT
+{%- endif -%}qqq
+</pre>
+
+{{ "}}>> <strong>Strong</strong>" | e}}
+<hr>
+{{ "<strong>Strong</strong>" | safe}}
+{{ "<strong>Strong</strong>" | striptags}}
+
+<hr>
+<p>markup={{markup}}</p>
+
+{% raw %}
+<pre>
+ttt 한글
+{% if True  %}
+    TTT
+{% endif %}qqq
+</pre>
+
+{% endraw %}
+
+<style>
+    .aaa {
+        font-weight: 700;
+    }
+</style>

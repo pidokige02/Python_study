@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Layout</title>
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+</head>
+<body>
+    <h1>{% block title %}여기가 타이틀이에요{% endblock %} - Layout Title </h1>
+
+    <h2>{% block title2 %}{% endblock %} - Layout Title2</h2>
+
+    <div class="section">
+        {% block section %} This is SECTion {% endblock %}
+    </div>
+
+    {% block outer_block %}
+    <h3>
+        {% block inner_block %}{% endblock inner_block %} -
+    </h3>
+    {% endblock outer_block %}
+
+    {% block footer%}
+        <p>&copy; Copyrigt...</p>
+    {% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+{% macro cal(dt) %}
+<div class="container text-center">
+    <h1>{{dt | month}} 월</h1>
+    <table class="table table-bordered table-sm">
+        <thead>
+            <tr>
+                {%- for w in '일월화수목금토' %}
+                <th>{{w}}</th>
+                {% endfor -%}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in range(dt | sdt, dt | edt) | batch(7, '&nbsp;') %}
+            <tr>
+                {% for col in row %}
+                <td>{% if ((col|int) <= 0) %}&nbsp;{%else%}{{col | safe}}{%endif%}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endmacro %}
+
+{% macro test_macro(type) -%}
+<h3 style="color: red;">
+    TEST MACRO ({{ttt}}): {{type}} - {{test_macro.caller}}
+</h3>
+{%- endmacro %}
+
+{% macro test_macro2(name, class='aaa') -%}
+<h3 class="{{class}}">
+    TEST MACRO2: {{name}} - {{test_macro2.caller}}
+    <div> {{caller(name + ":QQQ")}} </div>
+</h3>
+{%- endmacro %}

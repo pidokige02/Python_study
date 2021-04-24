@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="/Users/jade/workspace/python/hello/test.db" foreign_keys="1"/><window><current_tab id="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1153"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="Student"/><default_encoding codec=""/><browsetable_info data="AAAAAQAAAA4AUwB0AHUAZABlAG4AdAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//////////AAAAAP////8="/></tab_browse><tab_sql><sql name="SQL 1">select * from Student;
+
+</sql><sql name="SQL 2">insert into Club(name, leader) values('테니스부', 4);
+
+select s.*, c.name as 'student_name'
+     from Student s
+      left outer join Club c
+	              on c.leader = s.id;
+				  
+select * from Student s, Club c where c.leader = s.id;
+
+
+select * from Student;
+
+insert into Student(name, mobile) values('김이수', '010-1111-2222');
+
+delete from Club where id=2;
+delete from Student where id=4;
+
+select * from Club;</sql><sql name="SQL 3">-- create table StudentHistory(name text);
+
+
+-- create trigger tr_student_insert
+--   before insert on student
+-- 	begin
+-- 		insert into StudentHistory (name) values (NEW.name); 
+-- 	end;
+
+insert into Student(name) values('김사수');
+
+select * from StudentHistory;
+
+select * from Student;
+</sql><sql name="SQL 4">select rowid as rid, * from Student;
+
+vacuum;
+
+select * from sqlite_sequence;
+
+select * from sqlite_sequence where name = 'Student';
+
+delete from sqlite_sequence where name = 'Student';
+
+insert into sqlite_sequence values('Student', 8);
+
+update sqlite_sequence set seq=9 where name='Student';</sql><sql name="SQL 5">select * from Student;
+
+select * from sqlite_sequence;
+
+update sqlite_sequence set seq = 1 where name = 'Student';
+
+select leader from Club;
+
+delete from Student where id not in (select leader from Club);</sql><current_tab id="4"/></tab_sql></sqlb_project>

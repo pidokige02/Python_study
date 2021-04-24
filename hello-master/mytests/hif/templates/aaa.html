@@ -1,0 +1,87 @@
+{% extends "layout.html" %}
+{% import "macro/forms.html" as frm %}
+{% from "macro/forms.html" import input with context %}
+<div>
+    {% block section %}
+    {{ super() }}  
+    <p>TTTTTTTTTTTT</p>
+    {% endblock %}
+</div>
+
+{% macro cal(dt) %}
+    <h3>{{dt | month}} 월</h3>
+    <div class="row text-center">
+        <div class="col-12">
+            <table class="table text-center table-bordered table-smx xtable-responsive">
+                <thead>
+                <tr class="dt">
+                    {% for w in '일월화수목금토' %}
+                    <th>{{w}}</th>
+                    {% endfor %}
+                </tr>
+                </thead>
+                <tbody>
+                {% for row in range(dt | sdt, dt | edt) | batch(7, '&nbsp;') %}
+                <tr class="dt">
+                    {% for col in row %}
+                    <td>
+                        {%- if ( (col | int) <= 0) %}
+                            &nbsp; 
+                        {%else%}{{col| safe}}{% endif%}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endmacro %}
+
+{% block main %}
+    <h1 class="text-center my-5">
+        <small><a href="/?year={{year-1}}">{{year - 1}}</a></small> -
+        {{year}}년
+    </h1>
+    <div class="container text-center row">
+        {% for mm in range(1,13) | batch(3) %}
+        <!-- <div class="row"> -->
+            {% for m in mm %}
+                <div class="col">
+                {% set dt = "%s-%s-01" % (year, m) %}
+                {{cal(dt)}}
+                </div>
+            {% endfor %}
+        <!-- </div> -->
+        {% endfor %}
+    </div>
+
+    <p>{{today}} vs {{today | ymd}} == {{today | ymd('%m-%d') | safe}}</p>
+    <pre>
+        {{today | center(80)}} 
+        {{ (1024 * 1024) | filesizeformat | center(80)}}
+{{ 23.456 | round(2) | safe | indent(4, True)}}
+{{ ('abcdefgihisdfadfdadsaf11' * 10) | wordwrap(50) | truncate(100)}}
+    </pre>
+    <p>
+        {% call test_macro('aa') %}
+            AAAAAA
+        {% endcall %}
+    </p>
+    {% set inputVal='TTT' %}
+    <p>{% call test_macro('bb') %}{% endcall %}</p>
+    <p>id: {{frm.input('userid', 'userid')}}</p>
+    <p>idd: {{input('useridd', 'useridd')}}</p>
+{% endblock %}
+
+
+<div>
+    {% block outer_block %}
+    <p>1111111111</p>
+    {{ super() }}
+    {% block inner_block %}BBBBBB{% endblock inner_block %}
+    {% endblock outer_block %}
+</div>
+
+{% for item in [1,2] %}
+    {% block title2 scoped %} <p>XXXXXXXXXX {{item}}</p> {% endblock %}
+{% endfor %}
