@@ -1,3 +1,5 @@
+# class refactoring 기법으로 화일 이름을 대문자로 하여 만든다.
+
 g_grades = ['A', 'B', 'C', 'D', 'F']
 g_grades.reverse()  # list 순서를 뒤집는다.
 
