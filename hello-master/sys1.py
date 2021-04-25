@@ -1,8 +1,10 @@
 import sys, os
 
+
 print("__file__ ==>", __file__)
 print("dirname ==>", os.path.dirname(__file__))
 print("abspath ==>", os.path.abspath(__file__))
+
 
 # from mysys import clear
 # clear()
