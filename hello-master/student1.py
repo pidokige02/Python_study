@@ -5,6 +5,7 @@ from Student import Student
 g_grades = ['A', 'B', 'C', 'D', 'F']
 g_grades.reverse()
 
+
 students = []
 with open('students.csv', 'r', encoding='utf8') as file:
     for i, line in enumerate(file):
