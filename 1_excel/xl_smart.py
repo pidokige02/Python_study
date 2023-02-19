@@ -39,7 +39,7 @@ ws_previous = wb_old[wb_old.sheetnames[0]] #previous weeks SPR
 print(ws_new)
 print(ws_previous)
 
-for row in ws_previous.iter_rows(min_row=1, min_col=27, max_col=29):
+for row in ws_previous.iter_rows(min_row=1, min_col=28, max_col=30):
     for cell in row:
         ws_new[cell.coordinate].value = ws_previous[cell.coordinate].value
         ws_new[cell.coordinate].font = copy(ws_previous[cell.coordinate].font)
@@ -49,10 +49,10 @@ for row in ws_previous.iter_rows(min_row=1, min_col=27, max_col=29):
         ws_new[cell.coordinate].protection = copy(ws_previous[cell.coordinate].protection)
         ws_new[cell.coordinate].alignment = copy(ws_previous[cell.coordinate].alignment)
    
-# Comment, highlight column
-ws_new.column_dimensions[get_column_letter(27)].width = ws_previous.column_dimensions[get_column_letter(27)].width    
-ws_new.column_dimensions[get_column_letter(28)].width = ws_previous.column_dimensions[get_column_letter(28)].width    
-ws_new.column_dimensions[get_column_letter(29)].width = ws_previous.column_dimensions[get_column_letter(29)].width    
+# Critical	Triage	Comments column
+ws_new.column_dimensions[get_column_letter(28)].width = ws_previous.column_dimensions[get_column_letter(27)].width    
+ws_new.column_dimensions[get_column_letter(29)].width = ws_previous.column_dimensions[get_column_letter(28)].width    
+ws_new.column_dimensions[get_column_letter(30)].width = ws_previous.column_dimensions[get_column_letter(29)].width    
 
 # change sheet name of new comsolidated file
 position = new_file_name.find('FW')
